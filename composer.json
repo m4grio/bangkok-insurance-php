@@ -1,7 +1,7 @@
 {
-  "name": "m4grio/bangkok-insurance",
+  "name": "m4grio/bangkok-insurance-php",
   "type": "library",
-  "description": "A PHP client for Bangkok Insurance SOAP API",
+  "description": "A PHP client to interact with Bangkok Insurance API",
   "license": "MIT",
   "authors": [
     {
