@@ -19,8 +19,9 @@ class Factory
     public function getClient($wsdl, array $options = [])
     {
         $defaults = [
-            'trace'    => 1,
+            'trace'    => true,
             'features' => \SOAP_SINGLE_ELEMENT_ARRAYS,
+            'compression' => SOAP_COMPRESSION_ACCEPT | SOAP_COMPRESSION_GZIP,
         ];
         $options = array_merge($defaults, $options);
         $client = new SoapClient($wsdl, $options);
