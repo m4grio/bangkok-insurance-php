@@ -5,7 +5,6 @@ namespace m4grio\BangkokInsurance;
 use m4grio\BangkokInsurance\Process\ProcessInterface;
 use m4grio\BangkokInsurance\SoapClient\Factory;
 use Psr\Log\LoggerInterface;
-use SoapClient;
 
 /**
  * SOAP Client builder
@@ -89,17 +88,22 @@ class ClientBuilder
     }
 
     /**
-     * @return SoapClient
+     * Build a new client's intance
+     *
+     * @return Client
      */
     public function build()
     {
         $soapClient = (new Factory)->getClient($this->getEndpoint(), $this->getSoapOptions());
+        $client = new Client($soapClient, [
+            'UserId' => $this->userId,
+        ]);
 
         if ($this->log) {
             //
         }
 
-        return $soapClient;
+        return $client;
     }
 
     /**

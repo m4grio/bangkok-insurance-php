@@ -2,8 +2,6 @@
 
 namespace m4grio\BangkokInsurance\SoapClient;
 
-use SoapClient;
-
 /**
  * Soap Client Factory
  *
