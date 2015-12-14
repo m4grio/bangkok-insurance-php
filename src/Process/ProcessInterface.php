@@ -19,4 +19,9 @@ interface ProcessInterface
      * @return array
      */
     public function getClassmap();
+
+    /**
+     * @return string
+     */
+    public function getClient();
 }

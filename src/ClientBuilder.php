@@ -35,6 +35,11 @@ class ClientBuilder
     protected $process;
 
     /**
+     * @var string
+     */
+    protected $client;
+
+    /**
      * @var LoggerInterface
      */
     protected $log;
@@ -71,6 +76,19 @@ class ClientBuilder
     public function setProcess(ProcessInterface $process)
     {
         $this->process = $process;
+        $this->setClient($process->getClient());
+
+        return $this;
+    }
+
+    /**
+     * @param $clientClass
+     *
+     * @return ClientBuilder
+     */
+    public function setClient($clientClass)
+    {
+        $this->client = $clientClass;
 
         return $this;
     }
@@ -95,8 +113,8 @@ class ClientBuilder
     public function build()
     {
         $soapClient = (new Factory)->getClient($this->getEndpoint(), $this->getSoapOptions());
-        $client = new Client($soapClient, [
-            'UserId' => $this->userId,
+        $client = new $this->client($soapClient, [
+            'user_id' => $this->userId,
         ]);
 
         if ($this->log) {

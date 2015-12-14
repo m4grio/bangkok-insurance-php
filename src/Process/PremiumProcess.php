@@ -2,6 +2,9 @@
 
 namespace m4grio\BangkokInsurance\Process;
 
+use m4grio\BangkokInsurance\Client\PremiumClient;
+use m4grio\BangkokInsurance\Result\Premium\CalculatorVoluntaryResult;
+
 /**
  * Bangkok Insurance Premium Process
  *
@@ -19,8 +22,14 @@ class PremiumProcess extends ProcessAbstract
      * @var array
      */
     protected $classmap = [
-        'calculator' => '',
-        'calculator_comp_prem' => '',
-        'calculator_vol_prem' => '',
+        'VolPremiumBean' => CalculatorVoluntaryResult::class,
     ];
+
+    /**
+     * @return string
+     */
+    public function getClient()
+    {
+        return PremiumClient::class;
+    }
 }

@@ -2,7 +2,9 @@
 
 namespace m4grio\BangkokInsurance;
 
+use m4grio\BangkokInsurance\Result\AbstractResult;
 use SoapClient;
+use SoapFault;
 
 /**
  * Bangkok Insurance API Client
@@ -44,12 +46,20 @@ class Client
      * @param       $method
      * @param array $params
      *
-     * @return mixed
+     * @return AbstractResult
+     *
+     * @throws SoapFault
+     * @throws \Exception
      */
     public function call($method, Array $params = [])
     {
         $params = [$method => array_merge($this->defaultParams, $params)];
-        $result = $this->soapClient->$method($params);
+        try {
+            $result = $this->soapClient->__soapCall($method, $params);
+        } catch (SoapFault $fault) {
+            // @todo log
+            throw $fault;
+        }
 
         return $result;
     }

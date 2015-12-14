@@ -2,6 +2,8 @@
 
 namespace m4grio\BangkokInsurance\SoapClient;
 
+use SoapClient;
+
 /**
  * Soap Client Factory
  *
@@ -20,7 +22,7 @@ class Factory
     {
         $defaults = [
             'trace'       => true,
-            'features'    => \SOAP_SINGLE_ELEMENT_ARRAYS,
+            //'features'    => \SOAP_SINGLE_ELEMENT_ARRAYS,
             'compression' => SOAP_COMPRESSION_ACCEPT | SOAP_COMPRESSION_GZIP,
         ];
         $options = array_merge($defaults, $options);
