@@ -53,7 +53,7 @@ class Client
      */
     public function call($method, Array $params = [])
     {
-        $params = [$method => array_merge($this->defaultParams, $params)];
+        $params = $this->mergeParams($method, $params);
         try {
             $result = $this->soapClient->__soapCall($method, $params);
         } catch (SoapFault $fault) {
@@ -62,5 +62,21 @@ class Client
         }
 
         return $result;
+    }
+
+    /**
+     * Default way to merge params
+     *
+     * @param       $method
+     * @param array $params
+     *
+     * @return array
+     */
+    protected function mergeParams($method, Array $params = [])
+    {
+        $mergedParams = array_merge($this->defaultParams, $params);
+        $newParams = [$method => $mergedParams];
+
+        return $newParams;
     }
 }
