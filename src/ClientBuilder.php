@@ -40,9 +40,43 @@ class ClientBuilder
     protected $client;
 
     /**
+     * @var string
+     */
+    protected $agentCode;
+
+    /**
+     * @var string
+     */
+    protected $agentSeq;
+
+    /**
      * @var LoggerInterface
      */
     protected $log;
+
+    /**
+     * @param $agentCode string
+     *
+     * @return $this
+     */
+    public function setAgentCode($agentCode)
+    {
+        $this->agentCode = $agentCode;
+
+        return $this;
+    }
+
+    /**
+     * @param $agentSeq
+     *
+     * @return $this
+     */
+    public function setAgentSeq($agentSeq)
+    {
+        $this->agentSeq = $agentSeq;
+
+        return $this;
+    }
 
     /**
      * @param $endpoint
@@ -106,16 +140,18 @@ class ClientBuilder
     }
 
     /**
-     * Build a new client's intance
+     * Build a new client's instance
      *
      * @return Client
      */
     public function build()
     {
         $soapClient = (new Factory)->getClient($this->getEndpoint(), $this->getSoapOptions());
-        $client = new $this->client($soapClient, [
-            'user_id' => $this->userId,
-        ]);
+
+        $params['user_id'] = $this->userId;
+        $params['agent_code'] = $this->agentCode;
+        $params['agent_seq'] = $this->agentSeq;
+        $client = new $this->client($soapClient, $params);
 
         if ($this->log) {
             //
@@ -127,7 +163,7 @@ class ClientBuilder
     /**
      * @return string
      */
-    protected function getEndpoint()
+    public function getEndpoint()
     {
         $path = $this->getProcess()
             ->getWsdl()
