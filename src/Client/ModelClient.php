@@ -33,6 +33,10 @@ class ModelClient extends Client
         switch ($method) {
             case 'GetCarBrandAndModel':
                 $result = $rawResult->GetCarBrandAndModelReturn;
+            break;
+
+            case 'GetCarBrand':
+                $result = $rawResult->GetCarBrandReturn->x_car_brand->string;
         }
 
         return $result;
