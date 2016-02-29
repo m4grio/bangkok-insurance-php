@@ -12,6 +12,12 @@ use m4grio\BangkokInsurance\Client;
  */
 class ModelClient extends Client
 {
+    use ParamsMapperTrait;
+
+    protected $map = [
+        'user_id' => 'UserID',
+    ];
+
     /**
      * @param       $method
      * @param array $params
