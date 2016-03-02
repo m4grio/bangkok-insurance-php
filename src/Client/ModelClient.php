@@ -32,7 +32,7 @@ class ModelClient extends Client
 
         switch ($method) {
             case 'GetCarBrandAndModel':
-                $result = $rawResult->GetCarBrandAndModelReturn;
+                $result = $rawResult->GetCarBrandAndModelReturn->MakeModelBean;
             break;
 
             case 'GetCarBrand':
